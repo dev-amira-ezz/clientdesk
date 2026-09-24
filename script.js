@@ -37,6 +37,23 @@ const showCustomerList = () => {
     </tr>
 `
     });
+
+    const  proCustomersCount = customers.filter(customer=> customer.plan === 'pro').length;
+    const totalMonthlyEarnings = customers.reduce((sum, customer) => sum + customer.fee, 0)
+
+    const tableFooter = document.createElement('tfoot');
+    customersTable.appendChild(tableFooter);
+    tableFooter.innerHTML = `
+    <tr><th scope="row" colspan="3">
+    Total No. of Pro Customers
+    </th>
+    <td>${proCustomersCount}</td>
+    </tr>
+    <tr>
+    <th scope="row" colspan="3">Total Monthly Earnings</th>
+    <td>$${totalMonthlyEarnings}</td>
+    </tr>
+    `
 }
 
 document.onload = showCustomerList();
