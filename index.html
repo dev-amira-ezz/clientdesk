@@ -4,30 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>ClientDesk</title>
+    <title>Client Desk</title>
   </head>
-
   <body>
-    <h1>ClientDesk</h1>
-    <p>
-      This is the area where all our client data is displayed and updated. The
-      client list is available immediately on page load.
-    </p>
-    <table>
-      <caption>
-        Customer List
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Country</th>
-          <th scope="col">Plan</th>
-          <th scope="col">Monthly Fee</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-      <tfoot id="tableFooter"></tfoot>
-    </table>
+    <header>
+      <h1>Client Desk</h1>
+      <p>
+        This platform is designed to retrieve and calculate our customers' data
+      </p>
+    </header>
+    <main>
+      <table>
+        <caption>
+          Customers Data Table
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Country</th>
+            <th scope="col">Plan</th>
+            <th scope="col">Monthly Fees</th>
+          </tr>
+        </thead>
+        <tbody id="customer-container"></tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Number of Pro Customers</td>
+            <td id="pro-count"></td>
+          </tr>
+          <tr>
+            <td colspan="3">Total Monthly Revenue</td>
+            <td id="monthly-revenue"></td>
+          </tr>
+        </tfoot>
+      </table>
+      <p id="app-messages"></p>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>

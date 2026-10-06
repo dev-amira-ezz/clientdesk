@@ -1,65 +1,73 @@
-const customers = [
-  { name: "Alice", country: "USA", plan: "pro", fee: 25 },
-  { name: "John", country: "UK", plan: "free", fee: 0 },
-  { name: "Maria", country: "USA", plan: "pro", fee: 25 },
-  { name: "Ahmed", country: "Egypt", plan: "pro", fee: 15 },
-  { name: "Sara", country: "Egypt", plan: "free", fee: 0 },
-];
+"use strict";
+// Fetch customers data
+const fetchCustomers = async () => {
+  const response = await fetch("customers.json");
+  if (!response.ok) {
+    throw new Error("Error! Unable to retrieve data");
+  }
+  const customers = await response.json();
+  return customers;
+};
 
-// Display customer data into a table format
-const generateList = () => {
-  const tableBody = document.getElementById("tableBody");
+// --- Calculations ---
+// Count Pro customers
+const countProCustomers = (customers) => {
+  return customers.filter((customer) => customer.plan === "pro").length;
+};
 
+// Calculate Monthly Revenue
+
+const calculateMonthlyRevenue = (customers) => {
+  return customers.reduce((sum, customer) => sum + customer.fee, 0);
+};
+
+// --- Display Table ---
+// Show customers data
+const showCustomersData = (customers) => {
+  const customerContainer = document.getElementById("customer-container");
   customers.forEach((customer) => {
-    tableBody.innerHTML += `
-    <tr>
-    <td>${customer.name}</td>
-    <td>${customer.country}</td>
-    <td>${customer.plan.charAt(0).toUpperCase() + customer.plan.slice(1)}</td>
-    <td>$${customer.fee}</td>
-    </tr>
-`;
+    const customerRow = document.createElement("tr");
+    customerContainer.appendChild(customerRow);
+    const customerName = document.createElement("td");
+    customerName.textContent = customer.name;
+    customerRow.appendChild(customerName);
+    const customerCountry = document.createElement("td");
+    customerCountry.textContent = customer.country;
+    customerRow.appendChild(customerCountry);
+    const customerPlan = document.createElement("td");
+    customerPlan.textContent =
+      customer.plan.charAt(0).toUpperCase() + customer.plan.slice(1);
+    customerRow.appendChild(customerPlan);
+    const customerFee = document.createElement("td");
+    customerFee.textContent = `$${customer.fee}`;
+    customerRow.appendChild(customerFee);
   });
 };
 
-const calculateProCustomers = () => {
-  const proCustomersCount = customers.filter(
-    (customer) => customer.plan === "pro",
-  ).length;
-  return proCustomersCount;
+// Show number of pro customers
+const showProCount = (customers) => {
+  const proCount = document.getElementById("pro-count");
+  proCount.textContent = countProCustomers(customers);
 };
 
-const calculateMonthlyEarnings = () => {
-  const totalMonthlyEarnings = customers.reduce(
-    (sum, customer) => sum + customer.fee,
-    0,
-  );
-  return totalMonthlyEarnings;
+// Show monthly revenue
+const showMonthlyRevenue = (customers) => {
+  const monthlyRevenue = document.getElementById("monthly-revenue");
+  monthlyRevenue.textContent = `$${calculateMonthlyRevenue(customers)}`;
 };
 
-// Display pro members count and monthly earnings
-const generateFooterData = () => {
-  const proCustomersCount = calculateProCustomers();
-
-  const totalMonthlyEarnings = calculateMonthlyEarnings();
-
-  const tableFooter = document.getElementById("tableFooter");
-  tableFooter.innerHTML = `
-    <tr><th scope="row" colspan="3">
-    Total No. of Pro Customers
-    </th>
-    <td>${proCustomersCount}</td>
-    </tr>
-    <tr>
-    <th scope="row" colspan="3">Total Monthly Earnings</th>
-    <td>$${totalMonthlyEarnings}</td>
-    </tr>
-    `;
+// Generate Customers Table
+const loadCustomersData = async () => {
+  try {
+    const customers = await fetchCustomers();
+    showCustomersData(customers);
+    showProCount(customers);
+    showMonthlyRevenue(customers);
+  } catch (error) {
+    console.warn("Error!", error);
+    const appMessages = document.getElementById("app-messages");
+    appMessages.textContent = "Unable to retrieve data. Please try again later";
+  }
 };
 
-const showCustomerList = () => {
-  generateList();
-  generateFooterData();
-};
-
-showCustomerList();
+loadCustomersData();
