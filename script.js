@@ -63,11 +63,40 @@ const loadCustomersData = async () => {
     showCustomersData(customers);
     showProCount(customers);
     showMonthlyRevenue(customers);
+    searchCustomers(customers);
   } catch (error) {
     console.warn("Error!", error);
     const appMessages = document.getElementById("app-messages");
     appMessages.textContent = "Unable to retrieve data. Please try again later";
   }
+};
+
+const searchCustomers = (customers) => {
+  const customerContainer = document.getElementById("customer-container");
+  const searchButton = document.getElementById("search-button");
+  const searchInput = document.getElementById("search-input");
+  searchButton.addEventListener("click", () => {
+    customers.filter((customer) => {
+      if (searchInput.value === customer.name) {
+        customerContainer.textContent = "";
+        const customerRow = document.createElement("tr");
+        customerContainer.appendChild(customerRow);
+        const customerName = document.createElement("td");
+        customerName.textContent = customer.name;
+        customerRow.appendChild(customerName);
+        const customerCountry = document.createElement("td");
+        customerCountry.textContent = customer.country;
+        customerRow.appendChild(customerCountry);
+        const customerPlan = document.createElement("td");
+        customerPlan.textContent =
+          customer.plan.charAt(0).toUpperCase() + customer.plan.slice(1);
+        customerRow.appendChild(customerPlan);
+        const customerFee = document.createElement("td");
+        customerFee.textContent = `$${customer.fee}`;
+        customerRow.appendChild(customerFee);
+      }
+    });
+  });
 };
 
 loadCustomersData();

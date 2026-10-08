@@ -14,31 +14,42 @@
       </p>
     </header>
     <main>
-      <table>
-        <caption>
-          Customers Data Table
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Country</th>
-            <th scope="col">Plan</th>
-            <th scope="col">Monthly Fees</th>
-          </tr>
-        </thead>
-        <tbody id="customer-container"></tbody>
-        <tfoot>
-          <tr>
-            <td colspan="3">Number of Pro Customers</td>
-            <td id="pro-count"></td>
-          </tr>
-          <tr>
-            <td colspan="3">Total Monthly Revenue</td>
-            <td id="monthly-revenue"></td>
-          </tr>
-        </tfoot>
-      </table>
-      <p id="app-messages"></p>
+      <section id="search">
+        <input
+          type="search"
+          name="search-input"
+          id="search-input"
+          placeholder="Search for customer name"
+        />
+        <button type="button" id="search-button">Search Customers</button>
+      </section>
+      <section>
+        <table>
+          <caption>
+            Customers Data Table
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Country</th>
+              <th scope="col">Plan</th>
+              <th scope="col">Monthly Fees</th>
+            </tr>
+          </thead>
+          <tbody id="customer-container"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Number of Pro Customers</td>
+              <td id="pro-count"></td>
+            </tr>
+            <tr>
+              <td colspan="3">Total Monthly Revenue</td>
+              <td id="monthly-revenue"></td>
+            </tr>
+          </tfoot>
+        </table>
+        <p id="app-messages"></p>
+      </section>
     </main>
     <script src="script.js"></script>
   </body>
