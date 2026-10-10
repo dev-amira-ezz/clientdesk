@@ -1,0 +1,31 @@
+{
+  "name": "clientdesk",
+  "version": "1.0.0",
+  "description": "A customer management dashboard built with JavaScript.",
+  "main": "script.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-amira-ezz/clientdesk.git"
+  },
+  "keywords": [
+    "customer-management",
+    "javascript",
+    "dashboard"
+  ],
+  "author": "Amira Ezz",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/dev-amira-ezz/clientdesk/issues"
+  },
+  "homepage": "https://github.com/dev-amira-ezz/clientdesk#readme",
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
